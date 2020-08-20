@@ -1,0 +1,26 @@
+version: '3'
+services:
+  #服务名称
+  rabbitmq:
+    #容器名称
+    container_name: rabbitmq
+    #镜像名称
+    image: rabbitmq:alpine
+    #总是重启后启动
+    restart: always
+    #端口映射
+    ports:
+      - 5672:5672
+      - 15672:15672
+    #挂载
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    #环境变量
+    environment:
+      - RABBITMQ_DEFAULT_VHOST=beatflow
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+
+volumes:
+  rabbitmq_data:
+    driver: local
